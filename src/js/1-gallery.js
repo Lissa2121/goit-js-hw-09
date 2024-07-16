@@ -94,5 +94,3 @@ const gallery = new SimpleLightbox('.gallery a', {
   captionDelay: 250,
   overlayOpacity: 0.8,
 });
-
-
