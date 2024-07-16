@@ -1,6 +1,6 @@
-import simpleLightbox from "simplelightbox";
+import SimpleLightbox from 'simplelightbox';
 
-import "simplelightbox/dist/simple-lightbox.min.css";
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const images = [
   {
@@ -35,7 +35,7 @@ const images = [
     preview:
       'https://cdn.pixabay.com/photo/2018/09/13/10/36/mountains-3674334__340.jpg',
     original:
-      'https://cdn.pixabay.com/photo/2018/09/13/10/36/mountains-3674334_1280.jpg',
+      'https://cdn.pixabay.com/photo/2018/09/13/10/36/mounta  ins-3674334_1280.jpg',
     description: 'Alpine Mountains',
   },
   {
@@ -68,26 +68,31 @@ const images = [
   },
 ];
 
-const gallery = document.querySelector(".gallery");
+const galleryMarkup = document.querySelector('.gallery');
+galleryMarkup.insertAdjacentHTML('beforeend', createMarkup(images));
 
-const imgEl = images.map((image) => {
-return `<li class="gallery-item">
-<a class="gallery-link" href="${image.original}">
-<img 
- 		class="gallery-image" 
- 		src="${image.preview}" 
- 		alt="${image.description}" 
- 		/>
-</a>
+function createMarkup(arr) {
+  return arr
+    .map(
+      ({ preview, original, description }) => `
+      <li class="gallery-item">
+        <a class="gallery-link" href="${original}">
+          <img
+            class="gallery-image"
+            src="${preview}"
+            alt="${description}"
+          />
+        </a>
+      </li>
+  `
+    )
+    .join('');
+}
 
-</li>`;
-}).join("");
-gallery.insertAdjacentHTML("beforeend", imgEl);
-
-const lightbox = new simpleLightbox(".gallery a", {
-captions: true,
-captionsData: "alt",
-captionDelay: 250,
+const gallery = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+  overlayOpacity: 0.8,
 });
 
 
